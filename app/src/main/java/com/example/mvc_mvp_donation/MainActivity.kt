@@ -13,7 +13,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.mvc_mvp_donation.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),IViewPresenter{
 
 
     private lateinit var binding: ActivityMainBinding
@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         // inicializamos controller
 
         controller = Controller()
+
+        binding.button.setOnClickListener{makeDonation()}
 
 
     }
@@ -56,6 +58,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun updateTotalDonation(totalAmount: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun displayConfirmationMessage() {
+        TODO("Not yet implemented")
+    }
+
+    override fun displayErrorMessage() {
+        TODO("Not yet implemented")
+    }
+
+    override fun displayColorAlert(color: String) {
+        TODO("Not yet implemented")
+    }
 
 
 }

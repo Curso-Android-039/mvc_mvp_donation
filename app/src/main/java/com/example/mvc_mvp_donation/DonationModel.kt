@@ -29,6 +29,23 @@ class DonationModel {
     }
 
 
+    // mvp
+
+    fun chekAmount(): String{
+
+        if(totalAmount >= 200 && totalAmount<=500){
+
+            return "#F31A1A"
+        }
+        if(totalAmount >= 500 && totalAmount<=1000){
+
+            return "#FFB33"
+        }
+
+        return "#58FF11"
+
+    }
+
 
 
 
