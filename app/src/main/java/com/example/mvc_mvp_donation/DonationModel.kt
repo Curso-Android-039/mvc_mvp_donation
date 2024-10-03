@@ -19,6 +19,8 @@ class DonationModel {
         if( amount  != null  && amount >0){
 
             totalAmount += amount
+            // aca faltaba el tru
+            return true
         }
         return  false
     }

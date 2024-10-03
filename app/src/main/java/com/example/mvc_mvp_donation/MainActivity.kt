@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(),IViewPresenter{
 
 
     }
-    @SuppressLint("StringFormatInvalid")
+
     private  fun makeDonation(){
         val donation = controller.saveDonation(binding.tvDonation.text.toString())
         if(donation) {
