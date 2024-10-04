@@ -1,5 +1,6 @@
 package com.example.mvc_mvp_donation
 
+import android.graphics.Color
 import android.annotation.SuppressLint
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -17,7 +18,10 @@ class MainActivity : AppCompatActivity(),IViewPresenter{
 
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var controller: Controller
+    //parte 1
+  //private lateinit var controller: Controller
+    private lateinit var presenter: DonationPresenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,52 +30,48 @@ class MainActivity : AppCompatActivity(),IViewPresenter{
         setContentView(binding.root)
 
 
-        // inicializamos controller
+        // inicializamos controller parte 1
 
-        controller = Controller()
+      //  controller = Controller() parte 1
 
+
+        // parte 2 MVP
+         presenter = DonationPresenter(this)
         binding.button.setOnClickListener{makeDonation()}
 
 
     }
 
     private  fun makeDonation(){
-        val donation = controller.saveDonation(binding.tvDonation.text.toString())
-        if(donation) {
-
-            val totalDonation = controller.totalDonation()
-            // recibo el total de las donaciones
-            val total= getString(R.string.total_donaciones,totalDonation.toString())
-            binding.tvTotal.text= total
-            val toast = Toast.makeText(applicationContext, "Donación exitosa", Toast.LENGTH_LONG)
-            toast.show()
-
-        }
-        else{
-
-            val toast1 = Toast.makeText(
-                applicationContext, "Donación Fallida",
-                Toast.LENGTH_LONG)
-            toast1.show()
-        }
+        // aca se guarda la donación
+      presenter.saveDonation(binding.tvDonation.text.toString())
+        // limpia el textView
+        binding.tvDonation.setText("")
+        presenter.totalDonation()
+        presenter.checkTotal()
 
 
     }
 
+    // esta Función actualiza el visor de las donaciones
     override fun updateTotalDonation(totalAmount: Int) {
-        TODO("Not yet implemented")
+       val total  = getString(R.string.total_donaciones, totalAmount.toString())
+        binding.tvTotal.text = total
     }
 
     override fun displayConfirmationMessage() {
-        TODO("Not yet implemented")
+        val toast = Toast.makeText(applicationContext,"Donación Exitosa", Toast.LENGTH_LONG)
+        toast.show()
     }
 
     override fun displayErrorMessage() {
-        TODO("Not yet implemented")
+        val toast1 = Toast.makeText(applicationContext,"Donación Fallida", Toast.LENGTH_LONG)
+        toast1.show()
     }
 
     override fun displayColorAlert(color: String) {
-        TODO("Not yet implemented")
+        binding.textView2.setBackgroundColor(Color.parseColor(color))
+
     }
 
 
